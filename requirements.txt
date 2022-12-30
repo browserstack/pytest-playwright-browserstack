@@ -1,0 +1,8 @@
+browserstack-local
+jsonmerge
+playwright
+psutil
+pytest
+pytest-variables
+pytest-selenium
+browserstack-sdk
