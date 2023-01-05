@@ -2,8 +2,9 @@ from playwright.sync_api import expect
 
 
 def test_sample(session_capabilities,base_url) -> None:
-    #Load the PAge returned by the fixture
+
     try:
+        # Load the PAge returned by the fixture
         page=session_capabilities
         print(page)
         #Navigate to the base url
