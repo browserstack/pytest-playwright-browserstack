@@ -1,8 +1,12 @@
 browserstack-local
 jsonmerge
+multiprocess
+paver
 playwright
+pytest-playwright
 psutil
 pytest
 pytest-variables
-pytest-selenium
-browserstack-sdk
+pytest-xdist
+pytest-base-url
+python-dotenv

@@ -1,14 +1,6 @@
-from playwright.sync_api import Playwright, sync_playwright
-from src.tests.testCapabilities.testCaps import testCapabilities
-
-
-
-def run(playwright: Playwright) -> None:
-    print("Caps => "+testCapabilities.Chrome())
-    browser = playwright.chromium.launch(testCapabilities.Chrome(),headless=False)
-    #browser = playwright.chromium.launch( headless=False)
-    context = browser.new_context()
-    page = context.new_page()
+def test_sample(session_capabilities) -> None:
+    page=session_capabilities
+    print(page)
     page.goto("https://bstackdemo.com/", timeout=0)
     page.locator("[id=\"\\31 \"]").get_by_text("Add to cart").click()
     page.get_by_text("Checkout").click()
@@ -35,12 +27,5 @@ def run(playwright: Playwright) -> None:
         page.get_by_text("Download order receipt").click()
     download = download_info.value
 
-    #print("Data => " + str(data))
-
-    # ---------------------
-    context.close()
-    browser.close()
-
-
-with sync_playwright() as playwright:
-    run(playwright)
+#with sync_playwright() as playwright:
+#    run(playwright)

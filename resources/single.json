@@ -1,0 +1,23 @@
+{
+    "user": "BROWSERSTACK_USERNAME",
+    "key": "BROWSERSTACK_ACCESS_KEY",
+    "base_url":"https://bstackdemo.com/",
+    "capabilities": {
+            "projectName": "Pytest Browserstack",
+            "buildName": "browserstack-build-single",
+            "local": false,
+            "debug": "true",
+            "networkLogs": "true"
+    },
+    "environments": [
+        {
+            "os": "Windows",
+            "os_version": "10",
+            "name": "Test on Edge",
+            "build": "playwright-python-1",
+            "browser": "edge",
+            "browser_version": "latest"
+        }
+    ]
+}
+
