@@ -1,14 +1,13 @@
 from playwright.sync_api import expect
 
 
-def test_sample(session_capabilities) -> None:
-
+def test_sample(session_capabilities,base_url) -> None:
+    #Load the PAge returned by the fixture
     try:
-        # Load the PAge returned by the fixture
         page=session_capabilities
         print(page)
-        #Navigate to https://bstackdemo.com/
-        page.goto("https://bstackdemo.com/", timeout=0)
+        #Navigate to the base url
+        page.goto(base_url, timeout=0)
 
         #Add the first item to cart
         page.locator("[id=\"\\31 \"]").get_by_text("Add to cart").click()

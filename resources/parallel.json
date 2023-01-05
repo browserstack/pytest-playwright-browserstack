@@ -29,6 +29,18 @@
             "os_version": "Monterey",
             "name": "Test on Safari",
             "browser": "playwright-webkit"
+        },
+        {
+            "os": "OS X",
+            "os_version": "Ventura",
+            "name": "Test on Bundled Firefox",
+            "browser": "playwright-firefox"
+        },
+        {
+            "os": "OS X",
+            "os_version": "Big Sur",
+            "name": "Test on Bundled Chromium",
+            "browser": "playwright-chromium"
         }
 
     ]

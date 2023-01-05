@@ -55,7 +55,8 @@ if os.environ['REMOTE'] == "true":
     print(CONFIG['base_url'])
     if "local" in capabilities and capabilities['local']:
         start_local()
-        capabilities['localIdentifier'] = timenow
+        capabilities['browserstack.local'] = "true"
+        capabilities['browserstack.localIdentifier'] = timenow
     print("capabilities => "+json.dumps(capabilities))
     stringifiedCaps = urllib.parse.quote(json.dumps(capabilities))
     caps = 'wss://cdp.browserstack.com/playwright?caps=' + stringifiedCaps

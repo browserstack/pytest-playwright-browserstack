@@ -3,22 +3,19 @@
     "key": "BROWSERSTACK_ACCESS_KEY",
     "base_url":"http://localhost:3000/",
     "capabilities": {
-        "bstack:options": {
             "projectName": "Pytest Browserstack",
             "buildName": "browserstack-build-local",
             "local": true,
             "debug": "true",
             "networkLogs": "true"
-        }
+
     },
     "environments": [
         {
-            "bstack:options": {
-                "os": "Windows",
-                "osVersion": "11"
-            },
-            "browserName": "chrome",
-            "browserVersion": "latest"
+            "os": "Windows",
+            "os_version": "11",
+            "browser": "chrome",
+            "browser_version": "latest"
         }
     ]
 }
