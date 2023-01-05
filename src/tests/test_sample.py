@@ -1,31 +1,47 @@
-def test_sample(session_capabilities) -> None:
-    page=session_capabilities
-    print(page)
-    page.goto("https://bstackdemo.com/", timeout=0)
-    page.locator("[id=\"\\31 \"]").get_by_text("Add to cart").click()
-    page.get_by_text("Checkout").click()
-    page.locator("#username svg").click()
-    page.locator("#react-select-2-option-0-3").click()
-    page.locator(".css-tlfecz-indicatorContainer").click()
-    page.locator("#react-select-3-option-0-0").click()
-    page.get_by_role("button", name="Log In").click()
-    page.get_by_label("First Name").click()
-    page.get_by_label("First Name").fill("Venaktesh")
-    page.get_by_label("First Name").press("Tab")
-    page.get_by_label("Last Name").fill("Raghunathan")
-    page.get_by_label("Last Name").press("Tab")
-    page.get_by_label("Address").fill("200 John Olds Driver")
-    page.get_by_label("Address").press("Tab")
-    page.get_by_label("Address").click()
-    page.get_by_label("Address").fill("200 John Olds Drive")
-    page.get_by_label("Address").press("Tab")
-    page.get_by_label("State/Province").fill("CT")
-    page.get_by_label("State/Province").press("Tab")
-    page.get_by_label("Postal Code").fill("06042")
-    page.get_by_role("button", name="Submit").click()
-    with page.expect_download() as download_info:
-        page.get_by_text("Download order receipt").click()
-    download = download_info.value
+from playwright.sync_api import expect
 
-#with sync_playwright() as playwright:
-#    run(playwright)
+
+def test_sample(session_capabilities) -> None:
+    #Load the PAge returned by the fixture
+    try:
+        page=session_capabilities
+        print(page)
+        #Navigate to https://bstackdemo.com/
+        page.goto("https://bstackdemo.com/", timeout=0)
+
+        #Add the first item to cart
+        page.locator("[id=\"\\31 \"]").get_by_text("Add to cart").click()
+        phone=page.locator("[id=\"\\31 \"]").locator(".shelf-item__title").all_inner_texts()
+        print("Phone =>"+str(phone[0]))
+
+        #Get the items from Cart
+        qty=page.locator(".bag__quantity").all_inner_texts()
+        print("Bag quantity => "+ str(qty[0]))
+
+        #Verify if there is a shopping cart
+        expect(page.locator(".bag__quantity")).to_have_count(1)
+        # Verify if there is only one item in the shopping cart
+        expect(page.locator(".bag__quantity")).to_have_text("1")
+
+        #Log information to console
+        log_contextual_info("The cart has one item","info", page)
+
+        #Get the handle for cart item
+        cart_item=page.locator(".shelf-item__details")
+
+        #Verify if the cart has the right item
+        expect(cart_item.locator(".title")).to_have_text(phone)
+
+        #Update the test result
+        mark_test_status("passed", "The cart has "+str(cart_item.locator(".title").all_inner_texts()[0]), page)
+    except Exception as err:
+        #Extract error message from Exception
+        error=str(err).split("Call log:")[0].replace("\n"," but ").replace(":","=>").replace("'","")
+        mark_test_status("failed", error, page)
+
+def mark_test_status(status, reason, page):
+  page.evaluate("_ => {}", "browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\""+ status + "\", \"reason\": \"" + reason + "\"}}");
+
+def log_contextual_info(desc,loglevel,page):
+    page.evaluate("_ => {}",
+                  "browserstack_executor: {\"action\": \"annotate\", \"arguments\": {\"data\":\"" + desc + "\", \"level\": \"" + loglevel + "\"}}");
