@@ -1,4 +1,4 @@
-# python-playwright-browserstack
+# pytest-playwright-browserstack
 
 Playwright with PyTest Test runner Integration with BrowserStack.
 
