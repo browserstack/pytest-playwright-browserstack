@@ -1,0 +1,12 @@
+browserstack-local
+jsonmerge
+multiprocess
+paver
+playwright
+pytest-playwright
+psutil
+pytest
+pytest-variables
+pytest-xdist
+pytest-base-url
+python-dotenv
