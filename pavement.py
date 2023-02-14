@@ -19,19 +19,19 @@ setup(
 def run_py_test(config, run_type, task_id=0):
     if config == 'local' and run_type == 'remote':
         if platform.system() == "Windows":
-            sh('cmd /C "set CONFIG_FILE=resources/%s.json && set TASK_ID=%s && set REMOTE=true && pytest -s src/tests/test_sample.py --base-url http://localhost:3000"' % (config, task_id))
+            sh('cmd /C "set CONFIG_FILE=resources/%s.json && set TASK_ID=%s && set REMOTE=true && pytest -s src/tests/sample-local-test.py --base-url http://bs-local.com:45454"' % (config, task_id))
         else:
-            sh('CONFIG_FILE=resources/%s.json TASK_ID=%s REMOTE=true pytest -s src/tests/test_sample.py --base-url http://localhost:3000' % (config, task_id))
+            sh('CONFIG_FILE=resources/%s.json TASK_ID=%s REMOTE=true pytest -s src/tests/sample-local-test.py --base-url http://bs-local.com:45454' % (config, task_id))
     elif run_type == 'remote':
         if platform.system() == "Windows":
-            sh('cmd /C "set CONFIG_FILE=resources/%s.json && set TASK_ID=%s && set REMOTE=true && pytest -s src/tests/test_sample.py --base-url https://bstackdemo.com"' % (config, task_id))
+            sh('cmd /C "set CONFIG_FILE=resources/%s.json && set TASK_ID=%s && set REMOTE=true && pytest -s src/tests/sample-test.py --base-url https://bstackdemo.com"' % (config, task_id))
         else:
-            sh('CONFIG_FILE=resources/%s.json TASK_ID=%s REMOTE=true pytest -s src/tests/test_sample.py --base-url https://bstackdemo.com' % (config, task_id))
+            sh('CONFIG_FILE=resources/%s.json TASK_ID=%s REMOTE=true pytest -s src/tests/sample-test.py --base-url https://bstackdemo.com' % (config, task_id))
     else:
         if platform.system() == "Windows":
-            sh('cmd /C "set CONFIG_FILE=resources/%s.json && set TASK_ID=%s && set REMOTE=false && pytest -s src/tests/test_sample.py --base-url https://bstackdemo.com"' % (config, task_id))
+            sh('cmd /C "set CONFIG_FILE=resources/%s.json && set TASK_ID=%s && set REMOTE=false && pytest -s src/tests/sample-test.py --base-url https://bstackdemo.com"' % (config, task_id))
         else:
-            sh('CONFIG_FILE=resources/%s.json TASK_ID=%s REMOTE=false pytest -s src/tests/test_sample.py --base-url https://bstackdemo.com' % (config, task_id))
+            sh('CONFIG_FILE=resources/%s.json TASK_ID=%s REMOTE=false pytest -s src/tests/sample-test.py --base-url https://bstackdemo.com' % (config, task_id))
         
 
 @task

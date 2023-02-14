@@ -1,7 +1,7 @@
 {
     "user": "BROWSERSTACK_USERNAME",
     "key": "BROWSERSTACK_ACCESS_KEY",
-    "base_url":"http://localhost:3000/",
+    "base_url":"http://bs-local.com:45454",
     "capabilities": {
             "projectName": "Pytest Browserstack",
             "buildName": "browserstack-build-local",

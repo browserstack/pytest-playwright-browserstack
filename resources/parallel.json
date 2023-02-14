@@ -12,35 +12,23 @@
     "environments": [
         {
             "os": "Windows",
-            "os_version": "10",
-            "name": "Test on Edge latest",
-            "browser": "edge",
-            "browser_version": "latest"
-        },
-        {
-            "os": "Windows",
-            "os_version": "10",
+            "os_version": "11",
             "name": "Test on Chrome latest",
             "browser": "chrome",
             "browser_version": "latest"
         },
         {
             "os": "OS X",
-            "os_version": "Monterey",
-            "name": "Test on Safari",
-            "browser": "playwright-webkit"
-        },
-        {
-            "os": "OS X",
             "os_version": "Ventura",
-            "name": "Test on Bundled Firefox",
-            "browser": "playwright-firefox"
+            "name": "Test on Webkit latest on Ventura OS",
+            "browser": "playwright-webkit",
+            "browser_version": "latest"
         },
         {
-            "os": "OS X",
-            "os_version": "Big Sur",
-            "name": "Test on Bundled Chromium",
-            "browser": "playwright-chromium"
+            "os": "Windows",
+            "os_version": "11",
+            "name": "Test on latest Firefox browser",
+            "browser": "playwright-firefox"
         }
 
     ]

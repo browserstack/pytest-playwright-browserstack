@@ -11,7 +11,7 @@ from playwright.sync_api import Playwright
 
 load_dotenv()
 
-CONFIG_FILE = os.environ['CONFIG_FILE'] if 'CONFIG_FILE' in os.environ else 'resources/single.json'
+CONFIG_FILE = os.environ['CONFIG_FILE'] if 'CONFIG_FILE' in os.environ else 'resources/parallel.json'
 TASK_ID = int(os.environ['TASK_ID']) if 'TASK_ID' in os.environ else 0
 
 with open(CONFIG_FILE) as data_file:
