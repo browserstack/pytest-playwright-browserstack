@@ -13,7 +13,7 @@
         {
             "os": "Windows",
             "os_version": "11",
-            "name": "Test on Chrome latest",
+            "name": "Test on Chrome latest on Windows 11",
             "browser": "chrome",
             "browser_version": "latest"
         },
@@ -30,7 +30,6 @@
             "name": "Test on latest Firefox browser",
             "browser": "playwright-firefox"
         }
-
     ]
 }
 

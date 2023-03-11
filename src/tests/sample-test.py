@@ -41,7 +41,7 @@ def test_sample(session_capabilities,base_url) -> None:
         mark_test_status("failed", error, page)
 
 def mark_test_status(status, reason, page):
-  page.evaluate("_ => {}", "browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\""+ status + "\", \"reason\": \"" + reason + "\"}}");
+    page.evaluate("_ => {}", "browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\""+ status + "\", \"reason\": \"" + reason + "\"}}");
 
 def log_contextual_info(desc,loglevel,page):
     page.evaluate("_ => {}",
