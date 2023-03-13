@@ -26,22 +26,33 @@ setup(
 
 def run_py_test(config, run_type, task_id=0):
     print("Thread "+threading.current_thread().name+"; Thread count =>"+str(threading.active_count()))
-    if config == 'local' and run_type == 'remote':
-        if platform.system() == "Windows":
-            sh('cmd /C "set CONFIG_FILE=resources/%s.json && set TASK_ID=%s && set REMOTE=true && pytest -s src/tests/sample-local-test.py --base-url http://bs-local.com:45454"' % (config, task_id))
+    try:
+        if config == 'local' and run_type == 'remote':
+            if platform.system() == "Windows":
+                sh('cmd /C "set CONFIG_FILE=resources/%s.json && set TASK_ID=%s && set REMOTE=true && pytest -s src/tests/sample-local-test.py --base-url http://bs-local.com:45454"' % (config, task_id))
+            else:
+                sh('CONFIG_FILE=resources/%s.json TASK_ID=%s REMOTE=true pytest -v -s src/tests/sample-local-test.py --base-url http://bs-local.com:45454' % (config, task_id))
+        elif run_type == 'remote':
+            if platform.system() == "Windows":
+                sh('cmd /C "set CONFIG_FILE=resources/%s.json && set TASK_ID=%s && set REMOTE=true && pytest -s src/tests/sample-test.py --base-url https://bstackdemo.com"' % (config, task_id))
+            else:
+                sh('CONFIG_FILE=resources/%s.json TASK_ID=%s REMOTE=true pytest -s src/tests/sample-test.py --base-url https://bstackdemo.com' % (config, task_id))
         else:
-            sh('CONFIG_FILE=resources/%s.json TASK_ID=%s REMOTE=true pytest -v -s src/tests/sample-local-test.py --base-url http://bs-local.com:45454' % (config, task_id))
-    elif run_type == 'remote':
-        if platform.system() == "Windows":
-            sh('cmd /C "set CONFIG_FILE=resources/%s.json && set TASK_ID=%s && set REMOTE=true && pytest -s src/tests/sample-test.py --base-url https://bstackdemo.com"' % (config, task_id))
-        else:
-            sh('CONFIG_FILE=resources/%s.json TASK_ID=%s REMOTE=true pytest -s src/tests/sample-test.py --base-url https://bstackdemo.com' % (config, task_id))
-    else:
-        if platform.system() == "Windows":
-            sh('cmd /C "set CONFIG_FILE=resources/%s.json && set TASK_ID=%s && set REMOTE=false && pytest -s src/tests/sample-test.py --base-url https://bstackdemo.com"' % (config, task_id))
-        else:
-            sh('CONFIG_FILE=resources/%s.json TASK_ID=%s REMOTE=false pytest -s src/tests/sample-test.py --base-url https://bstackdemo.com' % (config, task_id))
-    if local_flag:
+            if platform.system() == "Windows":
+                sh('cmd /C "set CONFIG_FILE=resources/%s.json && set TASK_ID=%s && set REMOTE=false && pytest -s src/tests/sample-test.py --base-url https://bstackdemo.com"' % (config, task_id))
+            else:
+                sh('CONFIG_FILE=resources/%s.json TASK_ID=%s REMOTE=false pytest -s src/tests/sample-test.py --base-url https://bstackdemo.com' % (config, task_id))
+        if local_flag:
+            lock.acquire()
+            try:
+                print("Thread count after yield: " + str(threading.active_count()))
+                if threading.active_count() <= 2:
+                    # Stop Local
+                    stop_local()
+            finally:
+                    lock.release()
+                    print("Finally")
+    except Exception as err:
         lock.acquire()
         try:
             print("Thread count after yield: " + str(threading.active_count()))
@@ -49,8 +60,8 @@ def run_py_test(config, run_type, task_id=0):
                 # Stop Local
                 stop_local()
         finally:
-                lock.release()
-                print("Finally")
+            lock.release()
+            print("Finally")
 
 @task
 @consume_nargs(2)
