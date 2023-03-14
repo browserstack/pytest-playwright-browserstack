@@ -41,6 +41,7 @@ def run_py_test(config, run_type, task_id=0):
             if platform.system() == "Windows":
                 sh('cmd /C "set CONFIG_FILE=resources/%s.json && set TASK_ID=%s && set REMOTE=false && pytest -s src/tests/sample-test.py --base-url https://bstackdemo.com"' % (config, task_id))
             else:
+                print("No lccal no parallel")
                 sh('CONFIG_FILE=resources/%s.json TASK_ID=%s REMOTE=false pytest -s src/tests/sample-test.py --base-url https://bstackdemo.com' % (config, task_id))
         if local_flag:
             lock.acquire()
@@ -69,7 +70,11 @@ def run(args):
     """Run single, local and parallel test using different config."""
     jobs = []
     print(*args)
-    config_file = 'resources/%s.json' % (args[0])
+    testrun='parallel'
+    if args[0] == 'sample-local-test':
+        testrun='local'
+    print("Test Run =>", testrun)
+    config_file = 'resources/%s.json' % (testrun)
     with open(config_file) as data_file:
         CONFIG = json.load(data_file)
     environments = CONFIG['environments']
@@ -85,7 +90,7 @@ def run(args):
         local_flag=False
     for i in range(len(environments)):
         #p = Process(target=run_py_test, args=(args[0], args[1], i))
-        p = threading.Thread(target=run_py_test, args=(args[0], args[1], i), name=str(i))
+        p = threading.Thread(target=run_py_test, args=(testrun, args[1], i), name=str(i))
         jobs.append(p)
         p.start()
         
