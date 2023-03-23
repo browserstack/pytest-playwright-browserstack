@@ -1,0 +1,35 @@
+{
+    "user": "BROWSERSTACK_USERNAME",
+    "key": "BROWSERSTACK_ACCESS_KEY",
+    "base_url": "https://bstackdemo.com/",
+    "capabilities": {
+            "projectName": "Pytest Browserstack",
+            "buildName": "browserstack-build-parallel",
+            "local": false,
+            "debug": "true",
+            "networkLogs": "true"
+    },
+    "environments": [
+        {
+            "os": "Windows",
+            "os_version": "11",
+            "name": "Test on Chrome latest on Windows 11",
+            "browser": "chrome",
+            "browser_version": "latest"
+        },
+        {
+            "os": "OS X",
+            "os_version": "Ventura",
+            "name": "Test on Webkit latest on Ventura OS",
+            "browser": "playwright-webkit",
+            "browser_version": "latest"
+        },
+        {
+            "os": "Windows",
+            "os_version": "11",
+            "name": "Test on latest Firefox browser",
+            "browser": "playwright-firefox"
+        }
+    ]
+}
+
