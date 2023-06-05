@@ -24,9 +24,6 @@ def test_sample(session_capabilities, base_url) -> None:
         # Verify if there is only one item in the shopping cart
         expect(page.locator(".bag__quantity")).to_have_text("1")
 
-        # Log information to console
-        log_contextual_info("The cart has one item", "info", page)
-
         # Get the handle for cart item
         cart_item = page.locator(".shelf-item__details")
 
@@ -34,21 +31,7 @@ def test_sample(session_capabilities, base_url) -> None:
         #expect(cart_item.locator(".title")).to_have_text(phone)
         print("Cart item => "+cart_item.locator(".title").all_inner_texts()[0])
         assert cart_item.locator(".title").all_inner_texts()[0]==phone[0]
-
-        # Update the test result
-        mark_test_status("passed", "The cart has " + str(cart_item.locator(".title").all_inner_texts()[0]), page)
     except Exception as err:
         # Extract error message from Exception
         error = str(err).split("Call log:")[0].replace("\n", " but ").replace(":", "=>").replace("'", "")
-        mark_test_status("failed", error, page)
         raise ValueError(error)
-
-
-def mark_test_status(status, reason, page):
-    page.evaluate("_ => {}",
-                  "browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\"" + status + "\", \"reason\": \"" + reason + "\"}}");
-
-
-def log_contextual_info(desc, loglevel, page):
-    page.evaluate("_ => {}",
-                  "browserstack_executor: {\"action\": \"annotate\", \"arguments\": {\"data\":\"" + desc + "\", \"level\": \"" + loglevel + "\"}}");
