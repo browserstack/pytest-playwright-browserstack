@@ -13,26 +13,10 @@ Playwright with PyTest Test runner Integration with BrowserStack.
 * To run your automated tests using BrowserStack, you must provide a valid username and access key. This can be done by setting the BROWSERSTACK_USERNAME and BROWSERSTACK_ACCESS_KEY environment variables.
 
 ## Run sample tests
-* To run parallel tests, run `paver run sample-test remote`
+* To run tests, run `browserstack-sdk pytest -s src/tests/sample-test.py`
+* To run local tests, run `browserstack-sdk pytest -s src/tests/sample-local-test.py`.
 
-## Run tests on locally hosted websites
-* To run a local test, (if you have not set the BROWSERSTACK_ACCESS_KEY environment variable) first go to resources/local.json then edit key on line 3
-* Run `paver run sample-local-test remote`
-
-
-## Run sample tests locally
-* To run tests locally you may have to install the browser dependencies. 
-* For example, if you want to run the test on Firefox browser, you have to run the below command
-
-```
-playwright install firefox	
-
-```
-
-* After installing the browsers, run `paver run sample-test on-prem`
-
-
- Understand how many parallel sessions you need by using our [Parallel Test Calculator](https://www.browserstack.com/automate/parallel-calculator?ref=github)
+## Understand how many parallel sessions you need by using our [Parallel Test Calculator](https://www.browserstack.com/automate/parallel-calculator?ref=github)
 
 ## Notes
 * You can view your test results on the [BrowserStack Automate dashboard](https://www.browserstack.com/automate)
