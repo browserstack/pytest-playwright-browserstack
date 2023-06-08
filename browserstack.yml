@@ -23,7 +23,7 @@ buildIdentifier: '#${BUILD_NUMBER}' # Supports strings along with either/both ${
 # Set `framework` of your test suite. Example, `testng`, `cucumber`, `cucumber-testng`
 # This property is needed to send test context to BrowserStack (test name, status)
 framework: pytest
-
+useW3C: false
 # =======================================
 # Platforms (Browsers / Devices to test)
 # =======================================
@@ -32,15 +32,15 @@ framework: pytest
 platforms:
   - os: OS X
     osVersion: Big Sur
-    browserName: Chrome
+    browserName: chrome
     browserVersion: latest
   - os: Windows
     osVersion: 10
-    browserName: Edge
+    browserName: playwright-webkit
     browserVersion: latest
-  - deviceName: Samsung Galaxy S22 Ultra
-    browserName: chrome # Try 'samsung' for Samsung browser
-    osVersion: 12.0
+  # - deviceName: Samsung Galaxy S22 Ultra
+  #   browserName: chrome # Try 'samsung' for Samsung browser
+  #   osVersion: 12.0
     
 # =======================
 # Parallels per Platform
@@ -59,7 +59,7 @@ parallelsPerPlatform: 1
 # ==========================================
 # Set browserStackLocal to true if your website under test is not accessible publicly over the internet
 # Learn more about how BrowserStack Local works here -> https://www.browserstack.com/docs/automate/selenium/local-testing-introduction
-browserstackLocal: true # <boolean> (Default false)
+browserstackLocal: false # <boolean> (Default false)
 # browserStackLocalOptions:
 # Options to be passed to BrowserStack local in-case of advanced configurations
   # localIdentifier: # <string> (Default: null) Needed if you need to run multiple instances of local.
