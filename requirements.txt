@@ -10,5 +10,3 @@ pytest-xdist
 pytest-base-url
 python-dotenv
 browserstack-sdk
-selenium
-pytest-selenium
