@@ -19,4 +19,4 @@ def test_bstack_local_sample(page) -> None:
 @pytest.mark.xfail()
 def checkTitle(title):
     print("Title =>"+title)
-    assert title() == "BrowserStack Lical"
+    assert title() == "BrowserStack Local"
