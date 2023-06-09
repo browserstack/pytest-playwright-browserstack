@@ -10,7 +10,8 @@ Playwright with PyTest Test runner Integration with BrowserStack.
 
 * Clone the repo
 * Install dependencies `pip install -r requirements.txt`
-* To run your automated tests using BrowserStack, you must provide a valid username and access key. This can be done by setting the BROWSERSTACK_USERNAME and BROWSERSTACK_ACCESS_KEY environment variables.
+* To run your automated tests using BrowserStack, you must provide a valid username and access key. This can be done adding your userName and accesKey in the `browserstack.yml` file.
+* You can also set the credentials in BROWSERSTACK_USERNAME and BROWSERSTACK_ACCESS_KEY environment variables.
 
 ## Run sample tests
 * To run tests, run `browserstack-sdk pytest -s tests/sample-test.py`
