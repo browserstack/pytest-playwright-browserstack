@@ -28,7 +28,14 @@ def test_bstack_sample(page) -> None:
         #expect(cart_item.locator(".title")).to_have_text(phone)
         print("Cart item => "+cart_item.locator(".title").all_inner_texts()[0])
         assert cart_item.locator(".title").all_inner_texts()[0]==phone[0]
+        mark_test_status("passed", "The cart has " + str(cart_item.locator(".title").all_inner_texts()[0]), page)
     except Exception as err:
         # Extract error message from Exception
         error = str(err).split("Call log:")[0].replace("\n", " but ").replace(":", "=>").replace("'", "")
+        mark_test_status("failed", error, page)
         raise ValueError(error)
+
+
+def mark_test_status(status, reason, page):
+    page.evaluate("_ => {}",
+                  "browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\"" + status + "\", \"reason\": \"" + reason + "\"}}");
