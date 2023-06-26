@@ -31,18 +31,17 @@ useW3C: false
 # Entire list available here -> (https://www.browserstack.com/list-of-browsers-and-platforms/automate)
 platforms:
   - os: OS X
-    osVersion: Big Sur
+    osVersion: Ventura
     browserName: chrome
     browserVersion: latest
   - os: Windows
     osVersion: 10
-    browserName: playwright-webkit
+    browserName: playwright-firefox
     browserVersion: latest
   - os: OS X
-    osVersion: catalina
-    browserName: playwright-chromium
+    osVersion: Monterey
+    browserName: playwright-webkit
     browserVersion: latest
-    
 # =======================
 # Parallels per Platform
 # =======================
