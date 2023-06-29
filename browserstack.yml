@@ -30,17 +30,17 @@ useW3C: false
 # Platforms object contains all the browser / device combinations you want to test on.
 # Entire list available here -> (https://www.browserstack.com/list-of-browsers-and-platforms/automate)
 platforms:
-  - os: OS X
-    osVersion: Ventura
+  - os: Windows
+    osVersion: 11
     browserName: chrome
     browserVersion: latest
-  - os: Windows
-    osVersion: 10
-    browserName: playwright-firefox
-    browserVersion: latest
   - os: OS X
-    osVersion: Monterey
+    osVersion: Ventura
     browserName: playwright-webkit
+    browserVersion: latest
+  - os: Windows
+    osVersion: 11
+    browserName: playwright-firefox
     browserVersion: latest
 # =======================
 # Parallels per Platform
