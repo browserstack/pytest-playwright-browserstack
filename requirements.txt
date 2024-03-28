@@ -4,7 +4,7 @@ multiprocess
 playwright
 pytest-playwright
 psutil
-pytest
+pytest==7.4.4
 pytest-variables
 pytest-xdist
 pytest-base-url
