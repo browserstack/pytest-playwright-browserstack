@@ -24,16 +24,13 @@ with open(CONFIG_FILE) as data_file:
     CONFIG = json.load(data_file)
 
 
-
-
 BROWSERSTACK_USERNAME = os.environ['BROWSERSTACK_USERNAME'] if 'BROWSERSTACK_USERNAME' in os.environ else CONFIG["user"]
 BROWSERSTACK_ACCESS_KEY = os.environ['BROWSERSTACK_ACCESS_KEY'] if 'BROWSERSTACK_ACCESS_KEY' in os.environ else CONFIG[
     "key"]
 
 
-
-if os.environ['REMOTE'] == "true":
-    @pytest.fixture(scope='session')
+if os.environ.get('REMOTE', 'true') == "true":
+    @pytest.fixture(scope='function')
     def session_capabilities(playwright: Playwright):
         global timenow
         global lock
@@ -50,14 +47,14 @@ if os.environ['REMOTE'] == "true":
         print("capabilities => " + json.dumps(capabilities))
         stringifiedCaps = urllib.parse.quote(json.dumps(capabilities))
         caps = 'wss://cdp.browserstack.com/playwright?caps=' + stringifiedCaps
-        browser = playwright.chromium.connect(str(caps))
+        browser = playwright.chromium.launch()
         context = browser.new_context()
         page = context.new_page()
         yield page
         context.close()
         browser.close()
 else:
-    @pytest.fixture(scope='session')
+    @pytest.fixture(scope='function')
     def session_capabilities(playwright: Playwright):
         capabilities = CONFIG['environments'][TASK_ID]
         if "browser" in capabilities and capabilities['browser'] == 'chrome':
