@@ -11,6 +11,7 @@ from dotenv import load_dotenv
 import time
 
 from playwright.sync_api import Playwright
+from playwright.sync_api import Page
 
 lock = Lock()
 threaded_count = 0
@@ -50,6 +51,7 @@ if os.environ.get('REMOTE', 'true') == "true":
         browser = playwright.chromium.launch()
         context = browser.new_context()
         page = context.new_page()
+        
         yield page
         context.close()
         browser.close()
