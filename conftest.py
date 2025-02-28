@@ -24,6 +24,22 @@ TASK_ID = int(os.environ['TASK_ID']) if 'TASK_ID' in os.environ else 0
 BROWSERSTACK_USERNAME = os.environ['BROWSERSTACK_USERNAME']
 BROWSERSTACK_ACCESS_KEY = os.environ['BROWSERSTACK_ACCESS_KEY']
 
+
+def update_session_name(page, session_name=''):
+    if not (page and session_name):
+        return
+    
+    command = {
+        "action": "setSessionName",
+        "arguments": {
+            "name": session_name
+        }
+    }
+    
+    browser_stack_command = f"browserstack_executor: {json.dumps(command)}"
+    result = page.evaluate("() => {}", browser_stack_command)
+    return json.loads(result)
+
 if os.environ.get('REMOTE', 'true') == "true":
     @pytest.fixture(scope='function')
     def session_capabilities(playwright: Playwright):
@@ -36,6 +52,8 @@ if os.environ.get('REMOTE', 'true') == "true":
         browser = playwright.chromium.launch()
         context = browser.new_context()
         page = context.new_page()
+        print(f'Test name is {test_name}')
+        update_session_name(page,test_name)
         
         yield page
         context.close()
