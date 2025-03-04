@@ -2,7 +2,8 @@ import pytest
 from playwright.sync_api import expect
 
 
-def test_bstack_sample(page) -> None:
+def test_sample(session_capabilities) -> None:
+    page = session_capabilities
     try:
         # Navigate to the base url
         page.goto("https://bstackdemo.com/", timeout=0)
