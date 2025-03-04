@@ -3,7 +3,8 @@ import re
 import pytest
 from playwright.sync_api import expect
 
-def test_bstack_local_sample(page) -> None:
+def test_bstack_local_sample(session_capabilities) -> None:
+    page = session_capabilities
     try:
         #Navigate to the base url
         page.goto("http://bs-local.com:45454", timeout=0)

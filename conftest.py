@@ -40,21 +40,20 @@ def update_session_name(page, session_name=''):
     result = page.evaluate("() => {}", browser_stack_command)
     return json.loads(result)
 
-if os.environ.get('REMOTE', 'true') == "true":
-    @pytest.fixture(scope='function')
-    def session_capabilities(playwright: Playwright):
-        global timenow
-        global lock
-        test_name = os.environ.get('PYTEST_CURRENT_TEST').split(' ')[0].split('::')[1]
-        capabilities = {}
-        stringifiedCaps = urllib.parse.quote(json.dumps(capabilities))
-        caps = 'wss://cdp.browserstack.com/playwright?caps=' + stringifiedCaps
-        browser = playwright.chromium.launch()
-        context = browser.new_context()
-        page = context.new_page()
-        print(f'Test name is {test_name}')
-        update_session_name(page,test_name)
+@pytest.fixture(scope='function')
+def session_capabilities(playwright: Playwright):
+    global timenow
+    global lock
+    test_name = os.environ.get('PYTEST_CURRENT_TEST').split(' ')[0].split('::')[1]
+    capabilities = {}
+    stringifiedCaps = urllib.parse.quote(json.dumps(capabilities))
+    caps = 'wss://cdp.browserstack.com/playwright?caps=' + stringifiedCaps
+    browser = playwright.chromium.launch()
+    context = browser.new_context()
+    page = context.new_page()
+    update_session_name(page,test_name)
         
-        yield page
-        context.close()
-        browser.close()
+    yield page
+    context.close()
+    browser.close()
+    
