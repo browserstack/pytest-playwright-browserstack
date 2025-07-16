@@ -1,7 +1,7 @@
 browserstack-local
 jsonmerge
 multiprocess
-playwright
+playwright==1.52.0
 pytest-playwright
 psutil
 pytest==7.4.4
