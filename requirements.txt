@@ -1,12 +1,4 @@
-browserstack-local
-jsonmerge
-multiprocess
-playwright
-pytest-playwright
-psutil
-pytest==7.4.4
-pytest-variables
-pytest-xdist
-pytest-base-url
-python-dotenv
 browserstack-sdk
+playwright
+pytest
+pytest-playwright
