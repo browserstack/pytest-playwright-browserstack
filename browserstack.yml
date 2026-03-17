@@ -1,10 +1,13 @@
 userName: BROWSERSTACK_USERNAME
 accessKey: BROWSERSTACK_ACCESS_KEY
+
 framework: pytest
+
 projectName: BrowserStack Samples
 buildName: pytest-playwright-browserstack build
 buildIdentifier: '#${BUILD_NUMBER}'
 source: playwright-pytest:sample-main:v1.0
+
 platforms:
   - os: OS X
     osVersion: Ventura
@@ -18,9 +21,11 @@ platforms:
     osVersion: 11
     browserName: playwright-firefox
     browserVersion: latest
+
 parallelsPerPlatform: 1
 browserstackLocal: false
 testObservability: true
+
 debug: false
 networkLogs: false
 consoleLogs: errors
