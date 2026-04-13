@@ -1,4 +1,9 @@
+.vscode
 __pycache__
-.pytest_cache/
-local.log
+.pytest_cache
 env
+venv
+local.log
+*.pyc
+.DS_Store
+browserstack.err
