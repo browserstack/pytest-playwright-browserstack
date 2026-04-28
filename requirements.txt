@@ -9,4 +9,4 @@ pytest-variables
 pytest-xdist
 pytest-base-url
 python-dotenv
-browserstack-sdk
+browserstack-sdk @ https://sdk-assets.browserstack.com/python/browserstack_sdk-latest.tar.gz
